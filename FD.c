@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include "FD.h"
 
-
-void push (Fila *f, int x){
+//alterado para que receba um tipo info ao invés de um inteiro
+void push (Fila *f, info x){
     nodo *novo = (nodo*)malloc(sizeof(nodo));
-    novo -> info = x;
+    novo -> carta = x;
     novo -> prox = NULL;
     if(f -> fim != NULL)
         f-> fim -> prox = novo;
@@ -14,8 +14,9 @@ void push (Fila *f, int x){
     f -> fim = novo;
 }
 
-int pop (Fila *f){
-    int aux = f -> inicio -> info;
+//alterado para que retorne um tipo info ao invés de um inteiro
+info pop (Fila *f){
+    info aux = f -> inicio->carta;
     nodo *a= f -> inicio;
     f -> inicio = f -> inicio -> prox;
     free(a);

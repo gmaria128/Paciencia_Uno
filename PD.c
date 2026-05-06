@@ -1,16 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "PD.h"
+#include "info.h"
 
-void push (Pilha *p, int x){
+// alterado para inseriri um info ao invés de um inteiro
+void push (Pilha *p, info a){
     nodo *novo  = (nodo*)malloc(sizeof(nodo));
-    novo -> info = x;
+    novo -> carta = a;
     novo -> prox = p -> topo;
     p-> topo  = novo;
 }
 
-int pop (Pilha *p){
-    int a = p -> topo -> info;
+//alterado para retornar um info ao invés de um inteiro
+info pop (Pilha *p){
+    info a = p -> topo -> carta;
     nodo *aux = p-> topo;
     p-> topo = p-> topo -> prox;
     free (aux);

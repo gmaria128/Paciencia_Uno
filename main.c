@@ -7,6 +7,8 @@
 #include "info.h"
 
 int main (){
+
+    //criação do baralho
     info_t baralho[20];
     char cores[4][10]= {"amarelo", "verde", "azul", "vermelho"};
 
@@ -19,6 +21,7 @@ int main (){
         }
     }
 
+    //embaralhando as cartas
     srand(time(NULL));
     for (int i=19; i>0; i--){
         int j = rand() % (i+1);
@@ -27,10 +30,12 @@ int main (){
         baralho[j]= temp;
     }
 
+    //lendo o numero de pilhas
     int numPilha;
     scanf("%d", &numPilha);
-    int tamFila;
 
+    //lendo e criando a fila
+    int tamFila;
     int idx =0;
     scanf("%d", &tamFila);
     Fila *f;
@@ -46,6 +51,7 @@ int main (){
     printf("a sua fila nao pode estar vazia");
 }
 
+//criando as pilhas e colocando elas em um vetor
 Pilha *a[numPilha];
 for (int i =0; i<numPilha; i++){
     a[i]= criaPilha();

@@ -56,8 +56,12 @@ Pilha *a[numPilha];
 for (int i =0; i<numPilha; i++){
     a[i]= criaPilha();
 }
-
-int b = (20-1-idx);
+int b = (20-1-idx)/numPilha;
+for (int i =0; i<numPilha; i++){
+    for (int j =0; j<b; j++){
+        push(a[i], baralho[idx]);
+    }
+}
 
 
 }

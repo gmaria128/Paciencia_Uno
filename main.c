@@ -6,7 +6,7 @@
 #include "PD.h"
 #include "info.h"
 
-void imprimi_mesa(Fila *f, Pilha *a, int *v, int b, info_t mao){
+void imprimi_mesa(Pilha *a, int *v, int b, info_t mao){
     for (int i =0; i<b; i ++){
         info_t temp = pop (&a[i]);
         printf("%d: [%d %s] +%d \n", i++, temp.num, temp.cor, v[i]);
@@ -16,13 +16,10 @@ void imprimi_mesa(Fila *f, Pilha *a, int *v, int b, info_t mao){
     return;
 }
 
-void atacar (Fila *f, Pilha *a, int *v, info_t mao, int numPilha){
-    int jogada;
-    scanf("%d", &jogada);
-
+void atacar (Fila *f, Pilha *a, int *v, info_t mao, int numPilha, int jogada){
     if (jogada <= numPilha){
         if (v [jogada -1] != 0){
-            info_t x = pop(&a[jogada-1]);
+            info_t x = pop(a[jogada-1]);
             if(x.cor == mao.cor || x.num == mao.num){
             push(f,mao);
             mao = pop(f);
@@ -39,7 +36,24 @@ void atacar (Fila *f, Pilha *a, int *v, info_t mao, int numPilha){
     }else {
         printf("Jogada invalida. \n Jogada:");
         scanf("%d", &jogada);
-        }
+    }
+
+    return;
+}
+
+void troca_mao(int jogada, Fila *f, info_t mao){
+    push (f, mao);
+    mao = pop (f);
+}
+
+int terminar (int *v, int b){
+   if(b == 0)
+    return 1;
+
+   if(v[b] != 0)
+    return 0;
+
+   terminar(&v[b+1], b-1);
 }
 
 int main (){
@@ -72,7 +86,7 @@ int main (){
 
     //lendo e criando a fila
     int tamFila;
-    int idx =1;
+    idx = 1;
     scanf("%d", &tamFila);
     int t = tamFila;
     Fila *f;
@@ -106,6 +120,24 @@ for (int i =0; i<numPilha; i++){
     }
 }
 
+int jogada;
+scanf("%d", &jogada);
+
+while (terminar (v, b)!= 1 || jogada == -1){
+    if (jogada == -1){
+        imprimi_mesa(a, v, b, mao);
+        troca_mao(jogada, f, mao);
+    }
+
+   atacar(f, a, v, mao, numPilha, jogada);
+}
+
+if (jogada == -1){
+    printf ("Voce perdeu :(");
+}
 
 
 }
+
+
+

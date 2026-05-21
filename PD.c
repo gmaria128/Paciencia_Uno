@@ -3,18 +3,16 @@
 #include "PD.h"
 #include "info.h"
 
-// alterado para inseriri um info ao invés de um inteiro
-void push (Pilha *p, info a){
-    nodo *novo  = (nodo*)malloc(sizeof(nodo));
+void push (Pilha *p, info_t a){
+    nodo_pilha *novo  = (nodo_pilha*)malloc(sizeof(nodo_pilha));
     novo -> carta = a;
     novo -> prox = p -> topo;
     p-> topo  = novo;
 }
 
-//alterado para retornar um info ao invés de um inteiro
-info pop (Pilha *p){
-    info a = p -> topo -> carta;
-    nodo *aux = p-> topo;
+info_t pop (Pilha *p){
+    info_t a = p -> topo -> carta;
+    nodo_pilha *aux = p-> topo;
     p-> topo = p-> topo -> prox;
     free (aux);
     return a;
@@ -28,5 +26,10 @@ int vazia(Pilha *p){
 
 Pilha *criaPilha(){
     Pilha *p = (Pilha*)malloc (sizeof(Pilha));
-    p->topo == NULL;
+    p->topo = NULL;
+    return p;
+}
+
+info_t topo(Pilha *p){
+return p -> topo -> carta;
 }

@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include "FD.h"
 
-//alterado para que receba um tipo info ao invés de um inteiro
-void push (Fila *f, info x){
-    nodo *novo = (nodo*)malloc(sizeof(nodo));
+
+void pushf (Fila *f, info_t x){
+    nodo_fila *novo = (nodo_fila*)malloc(sizeof(nodo_fila));
     novo -> carta = x;
     novo -> prox = NULL;
     if(f -> fim != NULL)
@@ -14,10 +14,9 @@ void push (Fila *f, info x){
     f -> fim = novo;
 }
 
-//alterado para que retorne um tipo info ao invés de um inteiro
-info pop (Fila *f){
-    info aux = f -> inicio->carta;
-    nodo *a= f -> inicio;
+info_t popf (Fila *f){
+    info_t aux = f -> inicio->carta;
+    nodo_fila *a= f -> inicio;
     f -> inicio = f -> inicio -> prox;
     free(a);
     if (f -> inicio == NULL)
@@ -32,7 +31,7 @@ Fila *cria_fila(){
     return f;
 }
 
-void libera_lista (nodo *inicio){
+void libera_lista (nodo_fila *inicio){
     if (inicio == NULL) return;
     libera_lista (inicio -> prox);
     free (inicio);
@@ -41,4 +40,10 @@ void libera_lista (nodo *inicio){
 void libera_fila(Fila *f){
     libera_lista(f -> inicio);
     free(f);
+}
+
+int vaziaf (Fila *f){
+    if (f -> inicio == NULL) return 1;
+    else
+    return 0;
 }

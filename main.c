@@ -13,7 +13,7 @@ void imprimi_mesa(Pilha *a[], int *v, int numPilha, info_t mao){
         temp = topo (a[i]);
         printf("%d: [%d %s] +%d \n", i+1, temp.num, temp.cor, v[i]);
         } else {
-            printf("%d: []", i+1);
+            printf("%d: [] \n", i+1);
         }
     }
     printf("Na mao: [%d %s] \n Jogada:", mao.num, mao.cor);

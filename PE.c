@@ -2,15 +2,13 @@
 #include <stdlib.h>
 #include "PE.h"
 
-//alterado para receber um info 
-void push (Pilha *p, info a){
+void push (Pilha *p, info_t a){
     p -> topo ++;
     p-> v[p-> topo] = a;
 }
 
-//alterado para retornar um info
-info pop (Pilha *p){
-    info a  = p -> v[p->topo];
+info_t pop (Pilha *p){
+    info_t a  = p -> v[p->topo];
     p-> topo --;
     return a;
 }
@@ -25,4 +23,8 @@ Pilha *criaPilha(){
     Pilha *p = (Pilha*)malloc (sizeof(Pilha));
     p->topo = -1;
     return p;
+}
+
+info_t topo (Pilha *p){
+    return p-> v [p-> topo];
 }

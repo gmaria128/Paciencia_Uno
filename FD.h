@@ -4,7 +4,7 @@
 
 typedef struct Nodofila {
     info_t carta;
-    struct Nodo *prox;
+    struct Nodofila *prox;
 }nodo_fila;
 
 typedef struct{

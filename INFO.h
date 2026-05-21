@@ -4,6 +4,6 @@
 typedef struct{
     int num;
     char cor[10];
-} info;
+} info_t;
 
 #endif

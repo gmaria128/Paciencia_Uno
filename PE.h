@@ -7,7 +7,7 @@ typedef struct{
     info_t v[MAX];
     int topo;
 }Pilha;
-//Declara os protótipos das funções;
+//Declara os prototipos das funcoes;
 Pilha *criaPilha();
 int vazia(Pilha *p);
 info_t pop (Pilha *p);

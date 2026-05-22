@@ -2,12 +2,12 @@
 #define PE_H
 #include "info.h"
 #define MAX 100
-
+// Cria a estrutura que define a pilha;
 typedef struct{
     info_t v[MAX];
     int topo;
 }Pilha;
-
+//Declara os protótipos das funções;
 Pilha *criaPilha();
 int vazia(Pilha *p);
 info_t pop (Pilha *p);

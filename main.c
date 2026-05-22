@@ -51,7 +51,7 @@ int terminar(int v[], int numPilhas) {
 
 int main (){
 
-    //criação do baralho
+    //1 passo: cria o baralho de 20 cartas, e combina os 5 numeros (0-4) com as 4 cores;
     info_t baralho[20];
     char cores[4][10]= {"amarelo", "verde", "azul", "vermelho"};
 
@@ -64,7 +64,7 @@ int main (){
         }
     }
 
-    //embaralhando as cartas
+    //2 passo: embaralha aleatóriamente as cartas, usando números aleatórios com base no relógio do sistema;
     srand(time(NULL));
     for (int i=19; i>0; i--){
         int j = rand() % (i+1);
@@ -72,18 +72,19 @@ int main (){
         baralho[i] = baralho [j];
         baralho[j]= temp;
     }
+    //3 passo: manda a primeira carta do baralho pra "mao";
     info_t mao = baralho[0];
-    //lendo o numero de pilhas
+    //4 passo: recebe do usuario o numero desejado de pilhas e o tamaho da fila e armazena em variaveis inteiras;
     printf("Numero de pilhas:");    
     int numPilha;
     scanf("%d", &numPilha);
 
-    //lendo e criando a fila
     printf("Tamanho da fila:");
     int tamFila;
     idx = 1;
     scanf("%d", &tamFila);
     int t = tamFila;
+    //5 passo: cria a fila vazia e preenche com as cartas seguintes do baralho (apartir da posicao 1) e insere cartas até atingir o tamanho escplhido pelo usuario;
     Fila *f = cria_fila();
     while(tamFila!=0){
         pushf(f,baralho[idx]);
@@ -94,7 +95,7 @@ int main (){
 
 
     tamFila = t;
-    //criando as pilhas e colocando elas em um vetor
+    //6 passo: Agora distribui as cartas restantes nas pilhas, mantendo a quantidade de cada pilha o mais uniforme possive;
     Pilha *a[numPilha];
     for (int i =0; i<numPilha; i++){
         a[i]= criaPilha();
@@ -119,31 +120,37 @@ int main (){
 
     int contador_jogadas = 0;
     int jogada;
-
+    //7 passo: Aqui inicia o looping do jogo;
     while (1) {
+        //passo 7.1: Verifica a vitória e verifica se todas as pilhas estao vazias ao percorrer o vetor v[], linha 43;
         if (terminar(v, numPilha)) {
             printf("Voce venceu, parabens! :)\n");
             printf("Voce fez %d jogadas.\n", contador_jogadas);
             break;
         }
-    
+    //passo 7.2: imprime a mesa,exibindo o toppo de cada pilha e a carta na mao;
     imprimi_mesa(a, v, numPilha, mao);
+    //passo 7.3: lê qual é a jogada do usuario;
     scanf("%d", &jogada);
-    
+    //passo 7.4: Agora o programa executa a jogada do usuario;
+        //Imprime a derrota e encerra se -1;
     if (jogada == -1) {
         printf("Voce perdeu :(\n");
         break;
     }
+        //Chama troca_mao se 0;
     else if (jogada == 0) {
         mao = troca_mao(f, mao);
         contador_jogadas++;
     }
+       //verifica se a jogada digitada é um número válido de pilha;
     else if (jogada >= 1 && jogada <= numPilha) {
         
         //se a pilha não estiver vazia
         if (v[jogada-1] > 0) {
+            //pega a carta escolhida pra comparar;
             info_t topoCarta = topo(a[jogada-1]);
-            //verifica se a jogada é valida
+            // verifica se a acao é permitida pelas regras;
             if (strcmp(topoCarta.cor, mao.cor) == 0 || topoCarta.num == mao.num) {
                 atacar(f, a, v, &mao, jogada);
                 contador_jogadas++;
